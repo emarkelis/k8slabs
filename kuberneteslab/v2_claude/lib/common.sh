@@ -49,7 +49,7 @@ sync_node() {
   local dir
   dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-  ssh_run "$host" "mkdir -p ${REMOTE_WORKDIR}/lib"
+  ssh_run "$host" "sudo mkdir -p ${REMOTE_WORKDIR}/lib && sudo chown -R ${SSH_USER}:${SSH_USER} ${REMOTE_WORKDIR}"
   scp_to "$dir/lab.conf" "$host" "${REMOTE_WORKDIR}/lab.conf"
   scp_to "$dir/lib/common.sh" "$host" "${REMOTE_WORKDIR}/lib/common.sh"
   scp_to "$dir/01_bootstrap-node.sh" "$host" "${REMOTE_WORKDIR}/01_bootstrap-node.sh"

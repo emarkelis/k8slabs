@@ -8,7 +8,7 @@
 # needs SSH access to control/worker01/worker03.
 
 set -e
-DIR="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname -- "$0")" && pwd)"
 source "$DIR/lab.conf"
 source "$DIR/lib/common.sh"
 

@@ -5,7 +5,7 @@
 # Assumes 01_bootstrap-node.sh and 02_reset-node.sh already ran there.
 
 set -e
-DIR="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname -- "$0")" && pwd)"
 source "$DIR/lab.conf"
 source "$DIR/lib/common.sh"
 

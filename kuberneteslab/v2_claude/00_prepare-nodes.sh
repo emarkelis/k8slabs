@@ -14,7 +14,7 @@
 # afterwards if you like — nothing else reads it.
 
 set -e
-DIR="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname -- "$0")" && pwd)"
 source "$DIR/lab.conf"
 
 if [[ -z "$SSH_PASSWORD" ]]; then

@@ -5,7 +5,7 @@
 # here is idempotent — safe to run again on a node that's already set up.
 
 set -e
-DIR="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname -- "$0")" && pwd)"
 source "$DIR/lab.conf"
 
 echo "=== [$(hostname)] Bootstrapping Kubernetes node ==="
@@ -44,10 +44,11 @@ sudo systemctl enable containerd >/dev/null
 echo "-> kubeadm / kubelet / kubectl (${K8S_VERSION})"
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL "https://pkgs.k8s.io/core:/stable:/${K8S_VERSION}/deb/Release.key" \
-  | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  | sudo gpg --yes --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${K8S_VERSION}/deb/ /" \
   | sudo tee /etc/apt/sources.list.d/kubernetes.list >/dev/null
 sudo apt update
+sudo apt-mark unhold kubelet kubeadm kubectl >/dev/null 2>&1 || true
 sudo apt install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl >/dev/null
 
