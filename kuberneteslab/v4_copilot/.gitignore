@@ -1,0 +1,22 @@
+# Logs
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+
+# kubeadm
+*.yaml.rendered
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Secrets
+config/*.local
+
+# Generated
+tmp/
